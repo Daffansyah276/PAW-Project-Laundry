@@ -1,0 +1,70 @@
+<%- include('partials/head') %>
+
+<div class="max-w-6xl mx-auto px-8 py-10">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center mb-28">
+        <h1 class="text-2xl font-bold tracking-tight text-blue-600">Laundry Syah Jehan</h1>
+        <div class="flex gap-6 text-sm font-semibold text-slate-700">
+            <a href="#layanan" class="hover:text-blue-600 transition">Layanan</a>
+            <a href="/api/produk" class="hover:text-blue-600 transition">API Layanan</a>
+            <a href="/api/status" class="hover:text-blue-600 transition">API Status</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-32">
+        <!-- Kiri: Teks -->
+        <div class="pr-4">
+            <h2 class="text-[3.5rem] font-extrabold text-slate-900 leading-[1.05] mb-6 tracking-tight">
+                Pakaian bersih dan rapi, tanpa repot mencuci sendiri.
+            </h2>
+            <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-md">
+                Layanan laundry profesional terpercaya, cepat, dan dijamin wangi. Solusi tepat untuk pakaian kesayangan Anda.
+            </p>
+            <a href="#layanan" class="inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-md hover:bg-blue-700 transition shadow-md">
+                Lihat Layanan Kami
+            </a>
+        </div>
+        
+        <!-- Kanan: Mockup API -->
+        <div class="bg-[#1e293b] rounded-lg p-6 shadow-xl text-sm font-mono transform md:scale-105 border border-slate-700">
+            <div class="flex justify-between items-center text-slate-200 font-bold mb-6 text-xs tracking-wider">
+                <span>GET /api/status</span>
+                <span class="flex items-center text-slate-300 font-normal">
+                    <span class="w-2 h-2 rounded-full bg-green-500 mr-2 shadow-[0_0_8px_#22c55e]"></span>
+                    Sistem Berjalan
+                </span>
+            </div>
+            <pre class="text-[#38bdf8] leading-relaxed whitespace-pre-wrap"><code>{
+  "status": "ok",
+  "aplikasi": "Laundry Syah Jehan",
+  "uptimeDetik": 42,
+  "waktuServer": "2026-11-04T16:16:32.140Z"
+}</code></pre>
+        </div>
+    </div>
+
+    <!-- Product Section -->
+    <div id="layanan" class="max-w-[50rem]">
+        <h3 class="text-[1.75rem] font-bold text-slate-900 mb-1 tracking-tight">Daftar Layanan</h3>
+        <p class="text-slate-500 mb-10 text-[0.95rem]">Data bersumber dari <code class="text-sm bg-slate-200 px-1.5 py-0.5 rounded text-slate-700">models/produkModel.js</code>.</p>
+
+        <div class="border-t border-slate-300">
+            <% produk.forEach(item => { %>
+            <div class="py-6 border-b border-slate-300 hover:bg-white/50 transition-colors rounded-sm px-2 -mx-2">
+                <div class="flex justify-between items-start mb-1">
+                    <h4 class="text-[1.35rem] font-bold text-slate-900 tracking-tight"><%= item.nama %></h4>
+                    <span class="font-bold text-[1.1rem] text-blue-600">Rp <%= item.harga.toLocaleString('id-ID') %>/kg</span>
+                </div>
+                <p class="text-slate-600 mb-4 text-[0.95rem]"><%= item.deskripsi %></p>
+                <div class="flex justify-between items-center text-sm text-slate-500">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs font-semibold"><%= item.kategori %></span>
+                    <span class="text-green-600 font-medium"><%= item.stok %></span>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

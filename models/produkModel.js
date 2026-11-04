@@ -22,7 +22,7 @@ const dataProduk = [
         kategori: "Layanan Kiloan",
         harga: 4000, 
         stok: "Tersedia" 
-    }
+    },
 ];
 
 module.exports = {

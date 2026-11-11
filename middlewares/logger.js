@@ -1,8 +1,8 @@
 const logger = (req, res, next) => {
-    const timestamp = new Date().toISOString();
-    res.on('finish', () => {
-        console.log(`[${timestamp}] ${req.method} ${req.originalUrl} - Status: ${res.statusCode}`);
-    });
+    console.log(`[LOGGER] ${new Date().toLocaleTimeString()} - ${req.method} ${req.url}`);
+    if (req.method === 'POST') {
+        console.log('Data Masuk:', req.body);
+    }
     next();
 };
 

@@ -1,0 +1,177 @@
+<%- include('partials/head') %>
+
+<div class="max-w-6xl mx-auto px-8 py-10">
+    <!-- Navbar -->
+    <nav class="flex justify-between items-center mb-12">
+        <h1 class="text-2xl font-bold tracking-tight text-blue-600">Laundry Syah Jehan</h1>
+        <div class="flex gap-6 text-sm font-semibold text-slate-700">
+            <a href="/" class="hover:text-blue-600 transition">Beranda</a>
+            <a href="/kelola" class="text-blue-600">Kelola Layanan</a>
+            <a href="/api/produk" class="hover:text-blue-600 transition">API Layanan</a>
+            <a href="/api/status" class="hover:text-blue-600 transition">API Status</a>
+        </div>
+    </nav>
+
+    <h2 class="text-[1.75rem] font-bold text-slate-900 mb-1 tracking-tight">Kelola Layanan</h2>
+    <p class="text-slate-500 mb-8 text-[0.95rem]">Tambah, ubah, dan hapus layanan. Semua perubahan tersimpan di database melalui API.</p>
+
+    <!-- Pesan -->
+    <div id="pesan" class="hidden mb-6 px-4 py-3 rounded-md text-sm font-medium"></div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+        <!-- Form tambah / ubah -->
+        <form id="formProduk" class="bg-white rounded-lg shadow p-6 border border-slate-200 lg:col-span-1">
+            <h3 id="judulForm" class="text-lg font-bold mb-4">Tambah Layanan</h3>
+            <input type="hidden" id="produkId">
+
+            <label class="block text-sm font-semibold mb-1" for="nama">Nama</label>
+            <input id="nama" type="text" required class="w-full border border-slate-300 rounded-md px-3 py-2 mb-4 text-sm">
+
+            <label class="block text-sm font-semibold mb-1" for="deskripsi">Deskripsi</label>
+            <textarea id="deskripsi" rows="3" class="w-full border border-slate-300 rounded-md px-3 py-2 mb-4 text-sm"></textarea>
+
+            <label class="block text-sm font-semibold mb-1" for="kategori">Kategori</label>
+            <input id="kategori" type="text" value="Layanan Kiloan" class="w-full border border-slate-300 rounded-md px-3 py-2 mb-4 text-sm">
+
+            <label class="block text-sm font-semibold mb-1" for="harga">Harga per kg (Rp)</label>
+            <input id="harga" type="number" min="0" step="1" required class="w-full border border-slate-300 rounded-md px-3 py-2 mb-4 text-sm">
+
+            <label class="block text-sm font-semibold mb-1" for="stok">Status</label>
+            <input id="stok" type="text" value="Tersedia" class="w-full border border-slate-300 rounded-md px-3 py-2 mb-6 text-sm">
+
+            <div class="flex gap-3">
+                <button type="submit" id="tombolSimpan" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-md hover:bg-blue-700 transition text-sm">Simpan</button>
+                <button type="button" id="tombolBatal" class="hidden bg-slate-200 text-slate-700 font-semibold px-5 py-2 rounded-md hover:bg-slate-300 transition text-sm">Batal</button>
+            </div>
+        </form>
+
+        <!-- Tabel data -->
+        <div class="lg:col-span-2 bg-white rounded-lg shadow border border-slate-200 overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-slate-100 text-slate-600">
+                    <tr>
+                        <th class="px-4 py-3">ID</th>
+                        <th class="px-4 py-3">Nama</th>
+                        <th class="px-4 py-3">Kategori</th>
+                        <th class="px-4 py-3">Harga</th>
+                        <th class="px-4 py-3">Status</th>
+                        <th class="px-4 py-3 text-right">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API = '/api/produk';
+    const form = document.getElementById('formProduk');
+    const tabelBody = document.getElementById('tabelBody');
+    const pesan = document.getElementById('pesan');
+    const f = (id) => document.getElementById(id);
+
+    function tampilPesan(teks, sukses = true) {
+        pesan.textContent = teks;
+        pesan.className = 'mb-6 px-4 py-3 rounded-md text-sm font-medium ' +
+            (sukses ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800');
+    }
+
+    function resetForm() {
+        form.reset();
+        f('produkId').value = '';
+        f('kategori').value = 'Layanan Kiloan';
+        f('stok').value = 'Tersedia';
+        f('judulForm').textContent = 'Tambah Layanan';
+        f('tombolBatal').classList.add('hidden');
+    }
+
+    // Ambil data terbaru dari backend lalu tampilkan di tabel
+    async function muatData() {
+        const res = await fetch(API);
+        const json = await res.json();
+        tabelBody.innerHTML = '';
+        json.data.forEach((item) => {
+            const tr = document.createElement('tr');
+            tr.className = 'border-t border-slate-200';
+            const sel = (teks, cls = '') => {
+                const td = document.createElement('td');
+                td.className = 'px-4 py-3 ' + cls;
+                td.textContent = teks;
+                return td;
+            };
+            tr.append(
+                sel(item.id),
+                sel(item.nama, 'font-semibold'),
+                sel(item.kategori),
+                sel('Rp ' + Number(item.harga).toLocaleString('id-ID')),
+                sel(item.stok)
+            );
+
+            const aksi = document.createElement('td');
+            aksi.className = 'px-4 py-3 text-right whitespace-nowrap';
+            const btnEdit = document.createElement('button');
+            btnEdit.textContent = 'Ubah';
+            btnEdit.className = 'text-blue-600 font-semibold mr-4 hover:underline';
+            btnEdit.onclick = () => isiForm(item);
+            const btnHapus = document.createElement('button');
+            btnHapus.textContent = 'Hapus';
+            btnHapus.className = 'text-red-600 font-semibold hover:underline';
+            btnHapus.onclick = () => hapus(item);
+            aksi.append(btnEdit, btnHapus);
+            tr.append(aksi);
+
+            tabelBody.append(tr);
+        });
+    }
+
+    function isiForm(item) {
+        f('produkId').value = item.id;
+        f('nama').value = item.nama;
+        f('deskripsi').value = item.deskripsi;
+        f('kategori').value = item.kategori;
+        f('harga').value = item.harga;
+        f('stok').value = item.stok;
+        f('judulForm').textContent = 'Ubah Layanan #' + item.id;
+        f('tombolBatal').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function hapus(item) {
+        if (!confirm('Hapus layanan "' + item.nama + '"?')) return;
+        const res = await fetch(API + '/' + item.id, { method: 'DELETE' });
+        const json = await res.json();
+        tampilPesan(json.message, res.ok);
+        if (item.id == f('produkId').value) resetForm();
+        muatData();
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const id = f('produkId').value;
+        const body = {
+            nama: f('nama').value,
+            deskripsi: f('deskripsi').value,
+            kategori: f('kategori').value,
+            harga: f('harga').value,
+            stok: f('stok').value
+        };
+        const res = await fetch(id ? API + '/' + id : API, {
+            method: id ? 'PUT' : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        const json = await res.json();
+        tampilPesan(json.message, res.ok);
+        if (res.ok) {
+            resetForm();
+            muatData();
+        }
+    });
+
+    f('tombolBatal').addEventListener('click', resetForm);
+
+    muatData();
+</script>
+
+<%- include('partials/footer') %>

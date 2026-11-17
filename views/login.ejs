@@ -1,0 +1,30 @@
+<%- include('partials/head') %>
+
+<main class="min-h-[calc(100vh-260px)]">
+    <div class="max-w-6xl mx-auto px-5">
+        <nav class="py-5 flex items-center justify-between border-b border-blue-100">
+            <a href="/" class="flex items-center gap-3"><span class="brand-mark">S</span><span class="leading-tight"><b class="block text-sky-950">SYAH</b><small class="text-slate-500 font-semibold">LAUNDRY SERVICE</small></span></a>
+            <a href="/" class="btn-outline text-sm py-2 px-4">← Kembali ke Beranda</a>
+        </nav>
+
+        <section class="grid lg:grid-cols-2 max-w-5xl mx-auto my-10 lg:my-16 bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-xl shadow-blue-950/5">
+            <div class="hidden lg:flex login-panel p-10 flex-col justify-between text-white min-h-[560px]">
+                <div><span class="inline-flex bg-white/15 border border-white/25 px-3 py-1.5 rounded-full text-xs font-bold tracking-wide">SMARTLAUNDRY AI</span><h1 class="text-4xl font-extrabold leading-tight mt-6">Kelola laundry dengan lebih mudah.</h1><p class="text-blue-100 mt-4 leading-relaxed">Satu tempat untuk melihat layanan dan mendapatkan bantuan dari AI Assistant Laundry Syah Jehan.</p></div>
+                <div class="grid grid-cols-2 gap-3 text-sm"><div class="bg-white/10 rounded-xl p-4"><b class="block text-xl">Cepat</b><span class="text-blue-100">Akses layanan</span></div><div class="bg-white/10 rounded-xl p-4"><b class="block text-xl">Praktis</b><span class="text-blue-100">Bantuan AI</span></div></div>
+            </div>
+            <div class="p-7 sm:p-10 lg:p-12 flex flex-col justify-center">
+                <p class="eyebrow">SELAMAT DATANG</p><h2 class="text-3xl font-extrabold text-sky-950 mt-2">Masuk ke akun Anda</h2><p class="text-slate-500 text-sm mt-2">Masukkan detail akun untuk melanjutkan.</p>
+                <% if (typeof error !== 'undefined') { %><p class="mt-5 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"><%= error %></p><% } %>
+                <form method="POST" action="/login" class="mt-8 space-y-5">
+                    <label class="block text-sm font-bold text-slate-700">Email<input name="email" type="email" required placeholder="nama@email.com" class="login-input mt-2"></label>
+                    <label class="block text-sm font-bold text-slate-700">Kata sandi<input name="password" type="password" required placeholder="Masukkan kata sandi" class="login-input mt-2"></label>
+                    <div class="flex items-center justify-between text-sm"><label class="flex items-center gap-2 text-slate-500"><input type="checkbox" class="accent-blue-600"> Ingat saya</label><a href="#" class="font-bold text-blue-600 hover:text-blue-800">Lupa kata sandi?</a></div>
+                    <button type="submit" class="btn-primary w-full">Masuk</button>
+                </form>
+                <p class="text-center text-sm text-slate-500 mt-6">Belum punya akun? <a href="/register" class="font-bold text-blue-600 hover:text-blue-800">Daftar sekarang</a></p>
+            </div>
+        </section>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

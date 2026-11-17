@@ -1,0 +1,18 @@
+<%- include('partials/head') %>
+<main class="min-h-[calc(100vh-260px)]"><div class="max-w-4xl mx-auto px-5 py-8">
+    <div class="flex justify-between items-center mb-8"><a href="/" class="flex items-center gap-3"><span class="brand-mark">S</span><b class="text-sky-950">SYAH LAUNDRY</b></a><a href="/pesanan-saya" class="btn-outline text-sm py-2 px-4">Pesanan Saya</a></div>
+    <div class="text-center mb-8"><p class="eyebrow">PESAN LAUNDRY</p><h1 class="section-title">Buat Pesanan Baru</h1><p class="section-subtitle">Pilih layanan, isi berat cucian, lalu kami proses pesanan Anda.</p></div>
+    <section class="bg-white border border-blue-100 shadow-xl shadow-blue-950/5 rounded-2xl p-6 sm:p-8">
+        <% if (error) { %><p class="mb-5 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"><%= error %></p><% } %>
+        <form method="POST" action="/pesanan" class="space-y-6">
+            <div><label class="block font-bold text-slate-700 mb-3">Pilih layanan</label><div class="grid sm:grid-cols-2 gap-3"><% produk.forEach(item => { %><label class="cursor-pointer border border-blue-100 rounded-xl p-4 hover:border-blue-400 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50"><input required type="radio" name="produkId" value="<%= item.id %>" class="accent-blue-600"> <b class="ml-1 text-sky-950"><%= item.nama %></b><span class="block mt-1 text-sm text-slate-500"><%= item.deskripsi %></span><strong class="block mt-2 text-blue-700">Rp <%= item.harga.toLocaleString('id-ID') %>/kg</strong></label><% }) %></div></div>
+            <label class="block font-bold text-slate-700">
+                Berat cucian (kg)
+                <input required name="berat" type="text" inputmode="decimal" placeholder="Ketik berat cucian, contoh: 3 atau 1.5" class="login-input mt-2">
+            </label>
+            <label class="block font-bold text-slate-700">Catatan khusus <span class="font-normal text-slate-400">(opsional)</span><textarea name="catatan" rows="3" placeholder="Contoh: pisahkan pakaian putih, ada bahan mudah luntur" class="login-input mt-2 resize-y"></textarea></label>
+            <button class="btn-primary w-full">Buat Pesanan</button>
+        </form>
+    </section>
+</div></main>
+<%- include('partials/footer') %>

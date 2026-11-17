@@ -13,3 +13,15 @@ exports.index = async (req, res) => {
 exports.kelola = (req, res) => {
     res.render('kelola');
 };
+
+exports.chatbot = (req, res) => {
+    res.render('chatbot');
+};
+
+exports.login = (req, res) => {
+    res.render('login');
+};
+
+exports.register = (req, res) => {
+    res.render('register');
+};

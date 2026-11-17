@@ -2,12 +2,21 @@
   "name": "paw-week7-laundry-syah-jehan",
   "version": "1.0.0",
   "description": "Project Week 7 MVC Express - Laundry Syah Jehan",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js",
+    "dev": "node --watch app.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.10",
     "ejs": "^3.1.9",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-session": "^1.19.0",
+    "nodemailer": "^10.6.0",
+    "pg": "^8.23.1",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.8"
   }
 }

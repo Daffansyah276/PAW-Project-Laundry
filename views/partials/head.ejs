@@ -1,23 +1,124 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laundry Syah Jehan - Bersih, Rapi, Wangi</title>
+    <title>Laundry Syah Jehan - Delivering Excellence Every Step Ahead</title>
+    <link rel="icon" type="image/jpeg" href="/images/logo.jpg">
+    <!-- Google Fonts Plus Jakarta Sans / Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#f38d38',
+                            hover: '#e07a27',
+                            amber: '#f59e0b',
+                            cream: '#fdfbf7',
+                            card: '#faf6f0',
+                            dark: '#211d1a',
+                            muted: '#78716c'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { background:#f7fbff; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-        .top-strip { background:#0756a5; } .brand-mark { display:grid; place-items:center; width:2.4rem; height:2.4rem; border-radius:.65rem; color:#fff; font-weight:900; background:linear-gradient(135deg,#1d8ef2,#0756a5); box-shadow:0 5px 13px #1d8ef244; }
-        .nav-link { transition:.2s; } .nav-link:hover,.nav-link.active { color:#1670d2; }
-        .btn-primary { display:inline-flex; align-items:center; justify-content:center; background:#126bd1; color:white; font-weight:700; padding:.78rem 1.25rem; border-radius:.65rem; box-shadow:0 7px 16px #126bd12e; transition:.2s; }.btn-primary:hover{background:#0759b5;transform:translateY(-1px)}
-        .btn-outline{display:inline-flex;align-items:center;justify-content:center;border:1px solid #9cc8f8;color:#1163bd;font-weight:700;padding:.72rem 1.1rem;border-radius:.65rem;transition:.2s}.btn-outline:hover{background:#eff7ff}
-        .eyebrow{font-size:.7rem;letter-spacing:.11em;font-weight:800;color:#1b73d1}.section-title{font-size:1.75rem;font-weight:800;color:#082654;margin-top:.35rem}.section-subtitle{color:#64748b;margin-top:.4rem}
-        .hero-card { border-radius:1.6rem; background:linear-gradient(118deg,#fff 0%,#fff 51%,#eaf5ff 51%); border:1px solid #dcecff; box-shadow:0 15px 35px #174b7810; }.hero-visual{background:radial-gradient(circle at 70% 18%,#fff 0 15%,transparent 15.5%),linear-gradient(145deg,#d8efff,#9ed0fa);}
-        .bubble{position:absolute;border-radius:999px;background:#fff8}.bubble-one{width:9rem;height:9rem;top:10%;right:14%}.bubble-two{width:4rem;height:4rem;bottom:18%;left:14%}.machine{position:absolute;width:15rem;height:14rem;right:21%;top:17%;background:linear-gradient(120deg,#fff,#e2e8f0);border-radius:.7rem;box-shadow:9px 13px 25px #24527430;border:1px solid #d5dde5}.machine-panel{height:2.4rem;margin:.65rem;background:#1f2937;border-radius:.25rem}.machine-door{width:8.2rem;height:8.2rem;border:10px solid #d8e0e7;background:#1d2c38;border-radius:50%;margin:.5rem auto;display:grid;place-items:center}.machine-door div{width:5.5rem;height:5.5rem;border-radius:50%;background:radial-gradient(circle at 45% 30%,#bbecff,#496878 65%,#172631)}.laundry-basket{position:absolute;bottom:6%;left:12%;width:12rem;height:5.5rem;background:#b87a38;border:7px solid #dcaa70;border-radius:0 0 2.5rem 2.5rem;display:flex;gap:.75rem;align-items:flex-end;padding:0 1rem}.laundry-basket i{display:block;width:1.2rem;height:4rem;background:#87501f;border-radius:99px}.folded-clothes{position:absolute;width:7rem;height:1.35rem;border-radius:.3rem;box-shadow:0 4px 9px #43515c2e}.cloth-a{background:#fac5ce;bottom:35%;left:21%;}.cloth-b{background:#84c4df;bottom:29%;left:18%;}.cloth-c{background:#fff8dd;bottom:23%;left:23%;}
-        .service-card{display:flex;flex-direction:column;background:#fff;border:1px solid #dce8f5;border-radius:1rem;padding:1.3rem;min-height:15rem;box-shadow:0 8px 24px #1947770b;transition:.2s}.service-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px #19477718}.service-card h3{font-size:1.05rem;font-weight:800;color:#0d2f5f;margin-top:.7rem}.service-card p{font-size:.86rem;color:#64748b;line-height:1.45;margin-top:.35rem}.service-icon{display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:.8rem;background:#e9f4ff;color:#1670d2;font-size:1.35rem}.service-tag{font-size:.67rem;font-weight:700;color:#4180c4;margin-top:.8rem}.service-card strong{color:#126bd1;font-size:1.1rem}.service-card strong small{font-weight:600;font-size:.7rem}.availability{font-size:.7rem;font-weight:700;color:#159f64;background:#ecfdf3;padding:.3rem .5rem;border-radius:999px}.ai-banner{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:2rem 2.25rem;border-radius:1.25rem;background:linear-gradient(115deg,#0756a5,#2389e9);color:#fff;box-shadow:0 14px 28px #126bd132}.step-card{position:relative;background:#fff;border:1px solid #deebf7;border-radius:1rem;padding:1.25rem;min-height:10rem}.step-card span{display:grid;place-items:center;width:2rem;height:2rem;border-radius:.55rem;color:#126bd1;background:#e9f4ff;font-weight:800;font-size:.8rem}.step-card h3{font-weight:800;color:#0d2f5f;margin-top:.8rem}.step-card p{font-size:.8rem;color:#64748b;margin-top:.3rem;line-height:1.45}
-        @media(max-width:640px){.hero-card{background:#fff}.hero-visual{min-height:280px}.machine{right:13%;transform:scale(.9);transform-origin:top right}.laundry-basket{transform:scale(.8);transform-origin:bottom left}.ai-banner{padding:1.5rem;align-items:flex-start;flex-direction:column}}
-        .login-panel{background:radial-gradient(circle at 85% 15%,#55b3ff 0 7%,transparent 7.5%),linear-gradient(145deg,#0756a5,#1785e8)}.login-input{width:100%;border:1px solid #cbddec;border-radius:.7rem;padding:.8rem .9rem;color:#0f2744;outline:none;transition:.2s}.login-input:focus{border-color:#237ddd;box-shadow:0 0 0 3px #2f8aed1f}
-        .status-pill{height:max-content;border-radius:999px;padding:.35rem .65rem;font-size:.72rem;font-weight:800}.status-Dicuci{background:#e0f2fe;color:#0369a1}.status-Kering{background:#fef3c7;color:#92400e}.status-Disetrika{background:#ede9fe;color:#6d28d9}.status-Siap-Ambil{background:#dcfce7;color:#15803d}.status-Diambil{background:#e2e8f0;color:#475569}
+        body { 
+            background-color: #faf7f2; 
+            color: #292524;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+        .bg-warm-cream { background-color: #faf7f2; }
+        .bg-warm-card { background-color: #ffffff; }
+        .btn-pill-orange {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5913e, #e87b24);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.75rem 1.75rem;
+            border-radius: 9999px;
+            box-shadow: 0 10px 25px -5px rgba(243, 141, 56, 0.4);
+            transition: all 0.25s ease;
+        }
+        .btn-pill-orange:hover {
+            background: linear-gradient(135deg, #e87b24, #d56a15);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px -5px rgba(243, 141, 56, 0.5);
+        }
+        .btn-pill-light {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #44403c;
+            border: 1px solid #e7e5e4;
+            font-weight: 700;
+            padding: 0.75rem 1.6rem;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+        .btn-pill-light:hover {
+            background: #f5f5f4;
+            color: #1c1917;
+            border-color: #d6d3d1;
+        }
+        .service-img-card {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .service-img-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
+        }
+        .floating-badge {
+            animation: floatSlow 4s ease-in-out infinite alternate;
+        }
+        @keyframes floatSlow {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+        .status-pill {
+            height: max-content;
+            border-radius: 999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+        .status-Dicuci { background: #ffedd5; color: #c2410c; }
+        .status-Kering { background: #fef3c7; color: #b45309; }
+        .status-Disetrika { background: #f3e8ff; color: #7e22ce; }
+        .status-Siap-Ambil { background: #dcfce7; color: #15803d; }
+        .status-Diambil { background: #e7e5e4; color: #57534e; }
+        .login-input {
+            width: 100%;
+            border: 1px solid #e7e5e4;
+            border-radius: 0.85rem;
+            padding: 0.8rem 1rem;
+            color: #1c1917;
+            background: #ffffff;
+            outline: none;
+            transition: 0.2s;
+        }
+        .login-input:focus {
+            border-color: #f38d38;
+            box-shadow: 0 0 0 3px rgba(243, 141, 56, 0.18);
+        }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="bg-[#faf7f2] text-stone-800 antialiased selection:bg-orange-200 selection:text-orange-900">

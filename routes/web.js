@@ -5,7 +5,7 @@ const { requireAuth, requireAdmin } = require('../middlewares/auth');
 const pesananController = require('../controllers/pesanan.controller');
 
 router.get('/', homeController.index);
-router.get('/kelola', requireAuth, homeController.kelola);
+router.get('/kelola', requireAdmin, homeController.kelola);
 router.get('/chatbot', homeController.chatbot);
 router.get('/login', homeController.login);
 router.get('/register', homeController.register);

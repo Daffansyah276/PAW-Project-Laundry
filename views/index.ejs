@@ -1,143 +1,517 @@
 <%- include('partials/head') %>
 
-    <main>
-        <section class="top-strip text-white text-xs">
-            <div class="max-w-6xl mx-auto px-5 py-2 flex flex-wrap justify-between gap-2">
-                <span>Gratis antar-jemput untuk area terjangkau</span>
-                <span>Senin–Minggu · 08.00–21.00 WIB</span>
+    <main class="min-h-screen">
+        <!-- Top Announcement Strip -->
+        <div class="bg-[#211d1a] text-stone-300 text-xs py-2 px-6">
+            <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2">
+                <span class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Gratis antar-jemput area indekos &amp; kampus terdekat
+                </span>
+                <span class="text-stone-400">Senin – Minggu · 08.00 – 21.00 WIB</span>
             </div>
-        </section>
+        </div>
 
-        <div class="max-w-6xl mx-auto px-5">
-            <nav class="py-5 flex items-center justify-between gap-5">
-                <a href="/" class="flex items-center gap-3">
-                    <span class="brand-mark">S</span>
-                    <span class="leading-tight"><b class="block text-sky-950">SYAH</b><small
-                            class="text-slate-500 font-semibold">LAUNDRY SERVICE</small></span>
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+            <!-- Navbar (NeatWash Style) -->
+            <nav class="py-6 flex items-center justify-between gap-6 border-b border-stone-200/60">
+                <!-- Brand Logo -->
+                <a href="/" class="flex items-center gap-3 group">
+                    <img src="/images/logo.jpg" alt="SyahWash Logo"
+                        class="h-11 sm:h-12 w-auto object-contain rounded-xl shadow-sm border border-stone-200/80 group-hover:scale-105 transition-transform bg-white p-0.5">
+                    <span
+                        class="font-display font-extrabold text-2xl tracking-tight text-stone-900 hidden sm:inline-block">
+                        Syah<span class="text-[#f38d38]">Wash</span>
+                    </span>
                 </a>
-                <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                    <a class="nav-link active" href="/">Beranda</a>
-                    <a class="nav-link" href="#layanan">Layanan</a>
-                    <a class="nav-link" href="#cara-kerja">Cara Kerja</a>
-                    <a class="nav-link" href="/chatbot">AI Assistant</a>
-                    <a class="nav-link" href="/kelola">Kelola</a>
-                </div>
-                <% if (currentUser) { %>
-                    <div class="flex items-center gap-3">
-                        <% if (currentUser.role === 'admin') { %>
-                            <a href="/admin/pesanan" class="text-sm font-bold text-blue-700 hover:text-blue-900">Dashboard Admin</a>
-                        <% } else { %>
-                            <a href="/pesanan-saya" class="text-sm font-bold text-blue-700 hover:text-blue-900">Pesanan Saya</a>
+
+                <!-- Center Nav Links -->
+                <div class="hidden lg:flex items-center gap-8 text-sm font-semibold text-stone-600">
+                    <a class="hover:text-[#f38d38] transition font-bold text-stone-900" href="/">Home</a>
+                    <a class="hover:text-[#f38d38] transition" href="#layanan">Layanan</a>
+                    <a class="hover:text-[#f38d38] transition" href="#about">Tentang Kami</a>
+                    <a class="hover:text-[#f38d38] transition" href="#proses">Cara Kerja</a>
+                    <a class="hover:text-[#f38d38] transition flex items-center gap-1.5" href="/chatbot">
+                        <span>AI Assistant</span>
+                        <span
+                            class="px-2 py-0.5 text-[10px] bg-orange-100 text-[#e87b24] rounded-full font-bold">Gemini</span>
+                    </a>
+                    <% if (currentUser && currentUser.role==='admin' ) { %>
+                        <a class="hover:text-[#f38d38] transition text-[#e87b24]" href="/kelola">Kelola Layanan</a>
                         <% } %>
-                        <form method="POST" action="/logout">
-                            <button class="btn-primary text-sm px-4 py-2.5">Keluar</button>
-                        </form>
-                    </div>
-                <% } else { %>
-                    <a href="/login" class="btn-primary text-sm px-5 py-2.5">Masuk</a>
-                <% } %>
+                </div>
+
+                <!-- Right Action Buttons -->
+                <div class="flex items-center gap-3">
+                    <% if (currentUser) { %>
+                        <% if (currentUser.role==='admin' ) { %>
+                            <a href="/admin/pesanan"
+                                class="text-sm font-bold text-stone-700 hover:text-[#f38d38] transition mr-1">Dashboard
+                                Admin</a>
+                            <% } else { %>
+                                <a href="/pesanan-saya"
+                                    class="text-sm font-bold text-stone-700 hover:text-[#f38d38] transition mr-1">Pesanan
+                                    Saya</a>
+                                <% } %>
+                                    <form method="POST" action="/logout">
+                                        <button class="btn-pill-orange text-xs py-2 px-5">Keluar</button>
+                                    </form>
+                                    <% } else { %>
+                                        <a href="/login" class="btn-pill-orange text-sm py-2.5 px-6">
+                                            Masuk / Daftar
+                                        </a>
+                                        <% } %>
+                </div>
             </nav>
 
-            <section class="hero-card grid lg:grid-cols-2 items-center gap-8 mb-16 overflow-hidden">
-                <div class="p-7 sm:p-10 lg:pr-2">
-                    <p class="eyebrow">LAUNDRY ANDALAN ANDA</p>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold leading-[1.05] text-sky-950 mt-3">Pakaian
-                        Bersih,<br><span class="text-blue-600">Hidup Lebih Segar!</span></h1>
-                    <p class="text-slate-600 mt-5 max-w-md leading-relaxed">Cuci, kering, dan setrika yang praktis untuk
-                        hari-hari Anda yang padat. Bersih, rapi, dan wangi setiap saat.</p>
-                    <div class="flex flex-wrap gap-3 mt-7">
-                        <% if (currentUser && currentUser.role === 'admin') { %>
-                            <a href="/admin/pesanan" class="btn-primary">Kelola Pesanan</a>
-                        <% } else { %>
-                            <a href="<%= currentUser ? '/pesanan/baru' : '/login' %>" class="btn-primary">Pilih Layanan</a>
-                        <% } %>
-                        <a href="#cara-kerja" class="btn-outline">Pelajari Cara Kerja</a>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3 mt-9 text-xs text-slate-600">
-                        <div><b class="block text-blue-700 text-base">100%</b>Higienis</div>
-                        <div><b class="block text-blue-700 text-base">1–2 Hari</b>Pengerjaan</div>
-                        <div><b class="block text-blue-700 text-base">AI</b>Asisten Laundry</div>
-                    </div>
-                </div>
-                <div class="hero-visual min-h-[320px] lg:min-h-[410px] relative">
-                    <div class="bubble bubble-one"></div>
-                    <div class="bubble bubble-two"></div>
-                    <div class="machine">
-                        <div class="machine-panel"></div>
-                        <div class="machine-door">
-                            <div></div>
+            <!-- HERO SECTION (Persis Desain NeatWash) -->
+            <section
+                class="mt-8 mb-20 bg-white border border-stone-200/80 rounded-[2.5rem] p-7 sm:p-12 shadow-xl shadow-stone-900/5 overflow-hidden">
+                <div class="grid lg:grid-cols-12 items-center gap-10">
+                    <!-- Kiri: Headline & CTA -->
+                    <div class="lg:col-span-5">
+                        <span
+                            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-xs font-bold text-[#e87b24] mb-5 tracking-wide">
+                            ★ SMART LAUNDRY SERVICE
+                        </span>
+                        <h1
+                            class="font-display text-4xl sm:text-5xl font-extrabold text-stone-900 leading-[1.1] tracking-tight">
+                            Delivering excellence every step ahead
+                        </h1>
+                        <p class="mt-5 text-stone-500 text-sm sm:text-base leading-relaxed">
+                            Layanan cuci, kering, dan setrika higienis dengan pewangi tahan lama. Konsultasikan waktu
+                            selesai dan takaran pewangi terbaik melalui <b>AI Assistant</b> pintar kami.
+                        </p>
+                        <div class="mt-8 flex flex-wrap items-center gap-3">
+                            <% if (currentUser && currentUser.role==='admin' ) { %>
+                                <a href="/admin/pesanan" class="btn-pill-orange text-sm py-3.5 px-7">Kelola Antrean
+                                    Pesanan</a>
+                                <% } else { %>
+                                    <a href="<%= currentUser ? '/pesanan/baru' : '/login' %>"
+                                        class="btn-pill-orange text-sm py-3.5 px-7">
+                                        Pilih Layanan &amp; Pesan
+                                    </a>
+                                    <% } %>
+                                        <a href="/chatbot"
+                                            class="btn-pill-light text-sm py-3.5 px-6 flex items-center gap-2">
+                                            <span></span> Tanya AI Assistant
+                                        </a>
                         </div>
                     </div>
-                    <div class="laundry-basket"><i></i><i></i><i></i><i></i></div>
-                    <span class="folded-clothes cloth-a"></span><span class="folded-clothes cloth-b"></span><span
-                        class="folded-clothes cloth-c"></span>
+
+                    <!-- Kanan: Foto Tumpukan Baju + 3 Floating Badges -->
+                    <div class="lg:col-span-7 relative">
+                        <div class="grid sm:grid-cols-12 gap-5 items-center">
+                            <!-- Main Hero Image (Tumpukan Baju Rapi Warna-Warni) -->
+                            <div
+                                class="sm:col-span-7 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] max-h-[460px]">
+                                <img src="https://static.vecteezy.com/system/resources/previews/005/226/405/large_2x/laundry-with-wash-and-drying-machines-in-flat-background-illustration-dirty-cloth-lying-in-basket-and-women-are-washing-clothes-for-banner-or-poster-vector.jpg"
+                                    alt="Pakaian bersih, wangi, dan rapi"
+                                    class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-stone-900/30 to-transparent pointer-events-none">
+                                </div>
+                            </div>
+
+                            <!-- 3 Floating Feature Badges di samping foto -->
+                            <div class="sm:col-span-5 flex flex-col gap-3.5">
+                                <!-- Badge 1 -->
+                                <div
+                                    class="bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-stone-200/90 shadow-md flex items-center gap-3.5 transition hover:-translate-y-1">
+                                    <div
+                                        class="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 text-xl flex-shrink-0">
+                                        👕
+                                    </div>
+                                    <div>
+                                        <h4 class="font-display font-bold text-xs text-stone-900 leading-tight">Soft,
+                                            fresh &amp; revitalized</h4>
+                                        <p class="text-[11px] text-stone-500 mt-0.5">Pakaian wangi, bersih, dan segar
+                                            terawat</p>
+                                    </div>
+                                </div>
+
+                                <!-- Badge 2 -->
+                                <div
+                                    class="bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-stone-200/90 shadow-md flex items-center gap-3.5 transition hover:-translate-y-1">
+                                    <div
+                                        class="w-11 h-11 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 text-xl flex-shrink-0">
+                                        ✨
+                                    </div>
+                                    <div>
+                                        <h4 class="font-display font-bold text-xs text-stone-900 leading-tight">Expertly
+                                            dry-cleaned</h4>
+                                        <p class="text-[11px] text-stone-500 mt-0.5">Hasil cucian rapi bebas kusut</p>
+                                    </div>
+                                </div>
+
+                                <!-- Badge 3 -->
+                                <div
+                                    class="bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-stone-200/90 shadow-md flex items-center gap-3.5 transition hover:-translate-y-1">
+                                    <div
+                                        class="w-11 h-11 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 text-xl flex-shrink-0">
+                                        🌸
+                                    </div>
+                                    <div>
+                                        <h4 class="font-display font-bold text-xs text-stone-900 leading-tight">Delicate
+                                            fabrics treated</h4>
+                                        <p class="text-[11px] text-stone-500 mt-0.5">Rekomendasi dosis pewangi AI teruji
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section id="layanan" class="mb-16 scroll-mt-6">
-                <div class="text-center mb-8">
-                    <p class="eyebrow">LAYANAN KAMI</p>
-                    <h2 class="section-title">Laundry &amp; Perawatan Pakaian</h2>
-                    <p class="section-subtitle">Pilih layanan sesuai kebutuhan Anda.</p>
-                </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                    <% produk.forEach((item, index)=> { %>
-                        <article class="service-card">
-                            <div class="service-icon">
-                                <%= ['◈', '◌' , '✦' ][index % 3] %>
+            <!-- SECTION: About us beyond your expectations -->
+            <section id="about" class="mb-24">
+                <div class="grid lg:grid-cols-12 gap-10 items-center">
+                    <!-- Kiri: Deskripsi & Stat Card -->
+                    <div class="lg:col-span-5">
+                        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight">
+                            About us beyond your expectations
+                        </h2>
+                        <p class="mt-4 text-stone-600 text-sm leading-relaxed">
+                            Kami menghadirkan standar laundry modern untuk Anda yang memiliki jadwal padat. Didukung
+                            mesin cuci higienis, formula pelembut ramah serat kain, dan sistem pemantauan status pesanan
+                            secara transparan.
+                        </p>
+                        <div class="mt-7 flex items-center gap-4">
+                            <div
+                                class="inline-flex flex-col items-center justify-center bg-[#f38d38] text-white px-6 py-3.5 rounded-full shadow-lg shadow-orange-500/25">
+                                <span class="font-display font-extrabold text-2xl leading-none">1000+</span>
+                                <span class="text-[11px] font-medium opacity-90 mt-0.5">Pelanggan Aktif</span>
                             </div>
-                            <span class="service-tag">
-                                <%= item.kategori %>
-                            </span>
-                            <h3>
-                                <%= item.nama %>
-                            </h3>
-                            <p>
-                                <%= item.deskripsi %>
+                            <p class="text-xs text-stone-500 max-w-[200px] leading-snug">
+                                Kepercayaan pelanggan indekos, mahasiswa, dan keluarga setiap bulannya.
                             </p>
-                            <div class="mt-auto pt-5 flex justify-between items-end gap-2"><strong>Rp <%=
-                                        item.harga.toLocaleString('id-ID') %><small>/kg</small></strong>
-                                <% if (!currentUser || currentUser.role !== 'admin') { %>
-                                    <a href="<%= currentUser ? '/pesanan/baru' : '/login' %>" class="availability hover:bg-green-100">Pilih layanan</a>
-                                <% } %>
+                        </div>
+                    </div>
+
+                    <!-- Kanan: 2 Foto Proses Laundry -->
+                    <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+                        <div class="rounded-3xl overflow-hidden shadow-lg border-2 border-white aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=600&q=80"
+                                alt="Proses gantungan dan penyusunan baju"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="rounded-3xl overflow-hidden shadow-lg border-2 border-white aspect-[4/3]">
+                            <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=600&q=80"
+                                alt="Petugas melipat pakaian dengan teliti"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: 3 Pastel Service Highlights (NeatWash Top Cards) -->
+            <section class="mb-14">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#e87b24]">LAYANAN SPESIALIS</span>
+                    <h2 class="font-display text-3xl font-extrabold text-stone-900 mt-1">
+                        Expert laundry services delivered fresh
+                    </h2>
+                    <p class="text-stone-500 text-xs sm:text-sm mt-2">
+                        Tiga pilar layanan utama untuk menjaga pakaian kesayangan Anda selalu bersih dan wangi.
+                    </p>
+                </div>
+
+                <!-- 3 Pastel Cards: Orange, Yellow, Soft Blue -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Card 1: Orange Pastel -->
+                    <div
+                        class="bg-[#f78e3d] text-white p-7 rounded-[2rem] shadow-xl shadow-orange-500/15 flex flex-col items-center text-center transition hover:-translate-y-1.5">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl mb-4 border border-white/20">
+                            🧺
+                        </div>
+                        <h3 class="font-display font-extrabold text-xl">Quick Wash</h3>
+                        <p class="text-xs text-orange-50 mt-2 leading-relaxed">
+                            Pencucian cepat dan higienis untuk kebutuhan pakaian sehari-hari tanpa kompromi kebersihan.
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Amber Yellow Pastel -->
+                    <div
+                        class="bg-[#eab348] text-white p-7 rounded-[2rem] shadow-xl shadow-amber-500/15 flex flex-col items-center text-center transition hover:-translate-y-1.5">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl mb-4 border border-white/20">
+                            💨
+                        </div>
+                        <h3 class="font-display font-extrabold text-xl">Fresh Press</h3>
+                        <p class="text-xs text-amber-50 mt-2 leading-relaxed">
+                            Penyetrikaan uap presisi agar pakaian bebas kusut, licin, dan harum semerbak sepanjang hari.
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Soft Blue/Lavender Pastel -->
+                    <div
+                        class="bg-[#8fa4e8] text-white p-7 rounded-[2rem] shadow-xl shadow-indigo-500/15 flex flex-col items-center text-center transition hover:-translate-y-1.5">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl mb-4 border border-white/20">
+                            🧼
+                        </div>
+                        <h3 class="font-display font-extrabold text-xl">Stain Removal</h3>
+                        <p class="text-xs text-indigo-50 mt-2 leading-relaxed">
+                            Perawatan khusus noda membandel pada sepatu, seprai, dan bahan kain sensitif.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: KATALOG LAYANAN DENGAN GAMBAR (Semua Layanan Memiliki Gambar Nyata!) -->
+            <section id="layanan" class="mb-24 scroll-mt-10">
+                <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#e87b24]">DAFTAR PRODUK &amp;
+                            TARIF</span>
+                        <h2 class="font-display text-3xl font-extrabold text-stone-900 mt-1">
+                            Semua Paket Layanan Kami
+                        </h2>
+                        <p class="text-stone-500 text-xs sm:text-sm mt-1">
+                            Data riil dari database PostgreSQL dengan harga transparan dan higienis.
+                        </p>
+                    </div>
+                    <a href="/chatbot"
+                        class="inline-flex items-center gap-1.5 text-xs font-bold text-[#e87b24] hover:text-[#c26214] bg-orange-50 px-4 py-2 rounded-full border border-orange-200">
+                        <span>💡</span> Tanya AI untuk Rekomendasi Pewangi &rarr;
+                    </a>
+                </div>
+
+                <!-- Grid Layanan dengan Gambar -->
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+                    <% const serviceImages={ 'Cuci Komplit Reguler'
+                        : 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=700&q=80'
+                        , 'Cuci Komplit Ekspres'
+                        : 'https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=700&q=80'
+                        , 'Setrika Saja'
+                        : 'https://images.unsplash.com/photo-1489274495757-95c7c837b101?auto=format&fit=crop&w=700&q=80'
+                        , 'Cuci Sepatu Premium'
+                        : 'https://cms.kartinimedia.id/assets/img/202307230150164047-106035-1512_Freepik.jpg'
+                        , 'Cuci Seprai'
+                        : 'data:image/webp;base64,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'
+                        }; const
+                        defaultImage='https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=700&q=80'
+                        ; produk.forEach(function(item) { const imageUrl=serviceImages[item.nama] || defaultImage; %>
+                        <article
+                            class="service-img-card bg-white border border-stone-200/90 rounded-3xl overflow-hidden shadow-sm flex flex-col">
+                            <!-- Foto Layanan Nyata -->
+                            <div class="relative w-full h-48 overflow-hidden bg-stone-100">
+                                <img src="<%= imageUrl %>" alt="<%= item.nama %>"
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                                    loading="lazy">
+                                <!-- Badge Kategori -->
+                                <span
+                                    class="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-sm text-stone-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
+                                    <%= item.kategori %>
+                                </span>
+                                <!-- Badge Stok/Status -->
+                                <span
+                                    class="absolute top-3.5 right-3.5 bg-emerald-500/95 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                                    <%= item.stok || 'Tersedia' %>
+                                </span>
+                            </div>
+
+                            <!-- Konten Kartu -->
+                            <div class="p-6 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-display font-extrabold text-lg text-stone-900 leading-snug">
+                                        <%= item.nama %>
+                                    </h3>
+                                    <p class="text-stone-500 text-xs sm:text-sm mt-2 leading-relaxed line-clamp-2">
+                                        <%= item.deskripsi %>
+                                    </p>
+                                </div>
+
+                                <div
+                                    class="mt-6 pt-4 border-t border-stone-100 flex items-center justify-between gap-3">
+                                    <div>
+                                        <span class="text-[10px] uppercase font-bold text-stone-400 block">Tarif
+                                            Layanan</span>
+                                        <strong class="font-display font-black text-xl text-[#f38d38]">
+                                            Rp <%= item.harga.toLocaleString('id-ID') %><small
+                                                    class="text-xs font-semibold text-stone-500">/kg</small>
+                                        </strong>
+                                    </div>
+
+                                    <% if (!currentUser || currentUser.role !=='admin' ) { %>
+                                        <a href="<%= currentUser ? '/pesanan/baru' : '/login' %>"
+                                            class="btn-pill-orange text-xs py-2 px-4 shadow-sm">
+                                            Pilih Layanan
+                                        </a>
+                                        <% } else { %>
+                                            <a href="/kelola" class="btn-pill-light text-xs py-2 px-3 text-stone-600">
+                                                Edit Tarif
+                                            </a>
+                                            <% } %>
+                                </div>
                             </div>
                         </article>
                         <% }) %>
                 </div>
             </section>
 
-            <section class="ai-banner mb-16">
-                <div>
-                    <p class="eyebrow text-blue-100">ASISTEN CERDAS</p>
-                    <h2 class="text-2xl sm:text-3xl font-bold mt-2">Bingung memilih pewangi atau waktu selesai?</h2>
-                    <p class="text-blue-100 mt-2">Tanyakan langsung kepada AI Assistant Laundry Syah Jehan.</p>
+            <!-- SECTION: From humble beginnings to excellence (Timeline Visual) -->
+            <section class="mb-24 bg-white border border-stone-200/80 rounded-[2.5rem] p-7 sm:p-12 shadow-sm">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#e87b24]">KOMITMEN &amp;
+                        PERJALANAN</span>
+                    <h2 class="font-display text-3xl font-extrabold text-stone-900 mt-1">
+                        From humble beginnings to excellence
+                    </h2>
+                    <p class="text-stone-500 text-xs sm:text-sm mt-2">
+                        Dedikasi kami berkembang dari layanan cucian lokal hingga sistem pintar dengan AI.
+                    </p>
                 </div>
-                <a href="/chatbot"
-                    class="bg-white text-blue-700 font-bold rounded-xl px-5 py-3 whitespace-nowrap hover:bg-blue-50 transition">Mulai
-                    Chat →</a>
+
+                <!-- Mini Milestone Cards -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <!-- Milestone 1 -->
+                    <div class="bg-[#faf7f2] p-3.5 rounded-2xl border border-stone-200/60 text-center">
+                        <img src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?auto=format&fit=crop&w=300&q=80"
+                            alt="Foundation" class="w-full h-24 object-cover rounded-xl mb-2.5">
+                        <h5 class="font-display font-bold text-xs text-stone-900">Foundation</h5>
+                        <p class="text-[10px] text-stone-500 mt-0.5">Fokus kebersihan higienis</p>
+                    </div>
+                    <!-- Milestone 2 -->
+                    <div class="bg-[#faf7f2] p-3.5 rounded-2xl border border-stone-200/60 text-center">
+                        <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=300&q=80"
+                            alt="Local Launch" class="w-full h-24 object-cover rounded-xl mb-2.5">
+                        <h5 class="font-display font-bold text-xs text-stone-900">Local Launch</h5>
+                        <p class="text-[10px] text-stone-500 mt-0.5">Area indekos &amp; mahasiswa</p>
+                    </div>
+                    <!-- Milestone 3 -->
+                    <div class="bg-[#faf7f2] p-3.5 rounded-2xl border border-stone-200/60 text-center">
+                        <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=300&q=80"
+                            alt="Growth & Care" class="w-full h-24 object-cover rounded-xl mb-2.5">
+                        <h5 class="font-display font-bold text-xs text-stone-900">Quality Care</h5>
+                        <p class="text-[10px] text-stone-500 mt-0.5">Detergen ramah lingkungan</p>
+                    </div>
+                    <!-- Milestone 4 -->
+                    <div class="bg-[#faf7f2] p-3.5 rounded-2xl border border-stone-200/60 text-center">
+                        <img src="https://images.unsplash.com/photo-1489274495757-95c7c837b101?auto=format&fit=crop&w=300&q=80"
+                            alt="Smart Laundry" class="w-full h-24 object-cover rounded-xl mb-2.5">
+                        <h5 class="font-display font-bold text-xs text-stone-900">Smart AI</h5>
+                        <p class="text-[10px] text-stone-500 mt-0.5">Integrasi Google Gemini</p>
+                    </div>
+                    <!-- Milestone 5 -->
+                    <div
+                        class="bg-[#faf7f2] p-3.5 rounded-2xl border border-stone-200/60 text-center col-span-2 sm:col-span-1">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=300&q=80"
+                            alt="Customer First" class="w-full h-24 object-cover rounded-xl mb-2.5">
+                        <h5 class="font-display font-bold text-xs text-stone-900">Customer Care</h5>
+                        <p class="text-[10px] text-stone-500 mt-0.5">Tepat waktu &amp; terpercaya</p>
+                    </div>
+                </div>
             </section>
 
-            <section id="cara-kerja" class="mb-16 scroll-mt-6">
-                <div class="text-center mb-8">
-                    <p class="eyebrow">CARA KERJA</p>
-                    <h2 class="section-title">Empat Langkah Mudah</h2>
+            <!-- SECTION: Laundry process for fresh laundry about clean (4 Steps with Avatars) -->
+            <section id="proses" class="mb-24">
+                <div class="text-center max-w-xl mx-auto mb-14">
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#e87b24]">ALUR KERJA</span>
+                    <h2 class="font-display text-3xl font-extrabold text-stone-900 mt-1">
+                        Laundry process for fresh laundry about clean
+                    </h2>
+                    <p class="text-stone-500 text-xs sm:text-sm mt-2">
+                        Empat langkah praktis memastikan pakaian Anda kembali dalam kondisi terbaik.
+                    </p>
                 </div>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <% 
-                    const steps = [
-                        ['01', 'Pilih Layanan', 'Tentukan layanan yang Anda perlukan.'],
-                        ['02', 'Serahkan Cucian', 'Kami catat kebutuhan dan instruksi khusus.'],
-                        ['03', 'Kami Kerjakan', 'Pakaian dicuci dengan teliti dan higienis.'],
-                        ['04', 'Siap Diambil', 'Cucian rapi, wangi, dan siap digunakan.']
-                    ];
-                    steps.forEach(step => { 
-                    %>
-                        <div class="step-card">
-                            <span><%= step[0] %></span>
-                            <h3><%= step[1] %></h3>
-                            <p><%= step[2] %></p>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Step 1: Orange -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-4">
+                            <div class="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white">
+                                <img src="https://indradp.com/wp-content/uploads/2026/05/ilustrasi-laundry-premium.webp"
+                                    alt="Pilih Layanan" class="w-full h-full object-cover">
+                            </div>
+                            <span
+                                class="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#f38d38] text-white font-display font-extrabold text-sm flex items-center justify-center shadow-md">1</span>
                         </div>
-                    <% }) %>
+                        <h4 class="font-display font-extrabold text-base text-stone-900">Pilih Layanan</h4>
+                        <p class="text-stone-500 text-xs mt-1.5 max-w-[200px]">Tentukan paket kiloan atau satuan melalui
+                            website.</p>
+                    </div>
+
+                    <!-- Step 2: Yellow/Amber -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-4">
+                            <div class="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white">
+                                <img src="https://assets-a1.kompasiana.com/items/album/2022/01/17/8-revealing-laundry-secrets-from-5-star-hotels-61e5916980a65a2dd30d9265.jpg?t=o&v=1200"
+                                    alt="Serahkan Cucian" class="w-full h-full object-cover">
+                            </div>
+                            <span
+                                class="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#eab348] text-white font-display font-extrabold text-sm flex items-center justify-center shadow-md">2</span>
+                        </div>
+                        <h4 class="font-display font-extrabold text-base text-stone-900">Serahkan Cucian</h4>
+                        <p class="text-stone-500 text-xs mt-1.5 max-w-[200px]">Antar ke toko kami atau manfaatkan kurir
+                            jemput.</p>
+                    </div>
+
+                    <!-- Step 3: Soft Blue/Indigo -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-4">
+                            <div class="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white">
+                                <img src="https://tse4.mm.bing.net/th/id/OIP.A5CHGRo1_4fzxKHysC6rcQHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                                    alt="Proses Dikerjakan" class="w-full h-full object-cover">
+                            </div>
+                            <span
+                                class="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#8fa4e8] text-white font-display font-extrabold text-sm flex items-center justify-center shadow-md">3</span>
+                        </div>
+                        <h4 class="font-display font-extrabold text-base text-stone-900">Kami Kerjakan</h4>
+                        <p class="text-stone-500 text-xs mt-1.5 max-w-[200px]">Pencucian higienis &amp; disetrika uap
+                            dengan teliti.</p>
+                    </div>
+
+                    <!-- Step 4: Green -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-4">
+                            <div class="w-24 h-24 rounded-full overflow-hidden shadow-lg border-4 border-white">
+                                <img src="https://diamondcoinlaundry.com/wp-content/uploads/2024/08/diamond2-min.jpg"
+                                    alt="Siap Diambil" class="w-full h-full object-cover">
+                            </div>
+                            <span
+                                class="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-[#10b981] text-white font-display font-extrabold text-sm flex items-center justify-center shadow-md">4</span>
+                        </div>
+                        <h4 class="font-display font-extrabold text-base text-stone-900">Siap Diambil</h4>
+                        <p class="text-stone-500 text-xs mt-1.5 max-w-[200px]">Pakaian wangi, bersih, dan siap untuk
+                            digunakan.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: Bottom Banner (Make laundry day hassle-free) -->
+            <section
+                class="mb-20 bg-white border border-stone-200/80 rounded-[2.5rem] p-7 sm:p-12 shadow-xl shadow-stone-900/5 overflow-hidden">
+                <div class="grid lg:grid-cols-12 items-center gap-10">
+                    <!-- Foto Petugas Laundry Membawa Cucian Segar -->
+                    <div class="lg:col-span-5 rounded-3xl overflow-hidden shadow-lg aspect-[4/3] max-h-[340px]">
+                        <img src="https://1010dry.id/static/images/de4940affc4d5fd6705317ab89e552e3.png"
+                            alt="Petugas laundry ramah dan profesional" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Teks CTA -->
+                    <div class="lg:col-span-7">
+                        <span class="text-xs font-bold uppercase tracking-wider text-[#e87b24]">SMART LAUNDRY
+                            ASSISTANT</span>
+                        <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight mt-2">
+                            Make laundry day hassle-free with <span class="text-[#f38d38]">SyahWash</span>
+                        </h2>
+                        <p class="mt-4 text-stone-500 text-sm leading-relaxed">
+                            Tidak perlu lagi ragu memilih aroma pewangi atau bertanya-tanya kapan cucian selesai.
+                            Asisten AI kami selalu siap melayani pertanyaan Anda 24/7.
+                        </p>
+                        <div class="mt-7 flex flex-wrap items-center gap-3">
+                            <a href="/chatbot" class="btn-pill-orange text-sm py-3.5 px-7 flex items-center gap-2">
+                                <span></span> Mulai Konsultasi AI
+                            </a>
+                            <a href="<%= currentUser ? '/pesanan/baru' : '/login' %>"
+                                class="btn-pill-light text-sm py-3.5 px-6">
+                                Pesan Layanan Sekarang
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

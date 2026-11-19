@@ -2,29 +2,81 @@
 
 <main class="min-h-[calc(100vh-260px)]">
     <div class="max-w-6xl mx-auto px-5">
-        <nav class="py-5 flex items-center justify-between border-b border-blue-100">
-            <a href="/" class="flex items-center gap-3"><span class="brand-mark">S</span><span class="leading-tight"><b class="block text-sky-950">SYAH</b><small class="text-slate-500 font-semibold">LAUNDRY SERVICE</small></span></a>
-            <a href="/login" class="btn-outline text-sm py-2 px-4">← Kembali ke Login</a>
+        <nav class="py-5 flex items-center justify-between border-b border-stone-200">
+            <a href="/" class="flex items-center gap-2.5">
+                <img src="/images/logo.jpg" alt="SyahWash Logo" class="h-10 w-auto object-contain rounded-xl shadow-sm border border-stone-200 bg-white p-0.5">
+                <span class="font-display font-extrabold text-xl tracking-tight text-stone-900">Syah<span class="text-[#f38d38]">Wash</span></span>
+            </a>
+            <a href="/login" class="btn-pill-light text-xs sm:text-sm py-2 px-4">&larr; Kembali ke Login</a>
         </nav>
 
-        <section class="grid lg:grid-cols-2 max-w-5xl mx-auto my-10 lg:my-16 bg-white rounded-3xl overflow-hidden border border-blue-100 shadow-xl shadow-blue-950/5">
-            <div class="hidden lg:flex login-panel p-10 flex-col justify-between text-white min-h-[610px]">
-                <div><span class="inline-flex bg-white/15 border border-white/25 px-3 py-1.5 rounded-full text-xs font-bold tracking-wide">SMARTLAUNDRY AI</span><h1 class="text-4xl font-extrabold leading-tight mt-6">Mulai pengalaman laundry yang lebih praktis.</h1><p class="text-blue-100 mt-4 leading-relaxed">Buat akun untuk mengakses layanan Laundry Syah Jehan dan AI Assistant.</p></div>
-                <p class="text-blue-100 text-sm border-t border-white/20 pt-5">Data Anda akan digunakan hanya untuk kebutuhan layanan laundry.</p>
+        <section class="grid lg:grid-cols-2 max-w-5xl mx-auto my-10 lg:my-16 bg-white rounded-3xl overflow-hidden border border-stone-200 shadow-xl shadow-stone-900/5">
+            <!-- Sisi Kiri: Panel Teks Awal (Tanpa Gambar Foto) -->
+            <div class="hidden lg:flex p-10 flex-col justify-between text-white min-h-[610px] bg-gradient-to-br from-[#1c1917] via-[#292524] to-[#44403c]">
+                <div>
+                    <span class="inline-flex bg-white/15 border border-white/25 px-3 py-1.5 rounded-full text-xs font-bold tracking-wide">
+                        SMARTLAUNDRY AI
+                    </span>
+                    <h1 class="font-display text-4xl font-extrabold leading-tight mt-6">
+                        Mulai pengalaman laundry yang lebih praktis.
+                    </h1>
+                    <p class="text-stone-300 mt-4 leading-relaxed text-sm">
+                        Buat akun untuk mengakses layanan Laundry Syah Jehan dan AI Assistant.
+                    </p>
+                </div>
+                <p class="text-stone-300 text-xs border-t border-white/20 pt-5">
+                    Data Anda akan digunakan hanya untuk kebutuhan operasional layanan laundry.
+                </p>
             </div>
+
+            <!-- Sisi Kanan: Form Registrasi Akun -->
             <div class="p-7 sm:p-10 lg:p-12 flex flex-col justify-center">
-                <p class="eyebrow">BUAT AKUN</p><h2 class="text-3xl font-extrabold text-sky-950 mt-2">Daftar akun baru</h2><p class="text-slate-500 text-sm mt-2">Lengkapi data berikut untuk memulai.</p>
-                <% if (typeof error !== 'undefined') { %><p class="mt-5 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"><%= error %></p><% } %>
+                <p class="text-xs font-extrabold tracking-wider uppercase text-[#e87b24]">BUAT AKUN</p>
+                <h2 class="text-3xl font-extrabold text-stone-900 mt-2 font-display">Daftar akun baru</h2>
+                <p class="text-stone-500 text-sm mt-2">Lengkapi data berikut untuk memulai.</p>
+
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <p class="mt-5 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700"><%= error %></p>
+                <% } %>
+
                 <form method="POST" action="/register" class="mt-7 space-y-4">
-                    <label class="block text-sm font-bold text-slate-700">Nama lengkap<input name="nama" type="text" required placeholder="Masukkan nama lengkap" class="login-input mt-2"></label>
-                    <label class="block text-sm font-bold text-slate-700">Email<input name="email" type="email" required placeholder="nama@email.com" class="login-input mt-2"></label>
-                    <label class="block text-sm font-bold text-slate-700">Nomor WhatsApp<input name="telepon" type="tel" required placeholder="Contoh: 081234567890" class="login-input mt-2"></label>
-                    <label class="block text-sm font-bold text-slate-700">Kata sandi<input name="password" type="password" required minlength="8" placeholder="Minimal 8 karakter" class="login-input mt-2"></label>
-                    <label class="block text-sm font-bold text-slate-700">Konfirmasi kata sandi<input name="konfirmasiPassword" type="password" required minlength="8" placeholder="Ulangi kata sandi" class="login-input mt-2"></label>
-                    <label class="flex items-start gap-2 text-xs text-slate-500"><input type="checkbox" required class="accent-blue-600 mt-0.5"> Saya menyetujui penggunaan data untuk kebutuhan layanan Laundry Syah Jehan.</label>
-                    <button type="submit" class="btn-primary w-full">Buat Akun</button>
+                    <label class="block text-sm font-bold text-stone-700">
+                        Nama lengkap
+                        <input name="nama" type="text" required placeholder="Masukkan nama lengkap" class="login-input mt-2">
+                    </label>
+
+                    <label class="block text-sm font-bold text-stone-700">
+                        Email
+                        <input name="email" type="email" required placeholder="nama@email.com" class="login-input mt-2">
+                    </label>
+
+                    <label class="block text-sm font-bold text-stone-700">
+                        Nomor WhatsApp
+                        <input name="telepon" type="tel" required placeholder="Contoh: 081234567890" class="login-input mt-2">
+                    </label>
+
+                    <label class="block text-sm font-bold text-stone-700">
+                        Kata sandi
+                        <input name="password" type="password" required minlength="8" placeholder="Minimal 8 karakter" class="login-input mt-2">
+                    </label>
+
+                    <label class="block text-sm font-bold text-stone-700">
+                        Konfirmasi kata sandi
+                        <input name="konfirmasiPassword" type="password" required minlength="8" placeholder="Ulangi kata sandi" class="login-input mt-2">
+                    </label>
+
+                    <label class="flex items-start gap-2 text-xs text-stone-500 cursor-pointer pt-1">
+                        <input type="checkbox" required class="accent-[#f38d38] mt-0.5"> 
+                        Saya menyetujui penggunaan data untuk kebutuhan layanan Laundry Syah Jehan.
+                    </label>
+
+                    <button type="submit" class="btn-pill-orange w-full py-3.5 text-sm mt-2">Buat Akun</button>
                 </form>
-                <p class="text-center text-sm text-slate-500 mt-6">Sudah punya akun? <a href="/login" class="font-bold text-blue-600 hover:text-blue-800">Masuk</a></p>
+
+                <p class="text-center text-sm text-stone-500 mt-6">
+                    Sudah punya akun? 
+                    <a href="/login" class="font-bold text-[#e87b24] hover:underline">Masuk</a>
+                </p>
             </div>
         </section>
     </div>
